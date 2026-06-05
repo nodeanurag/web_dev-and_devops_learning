@@ -50,6 +50,8 @@ app.post("/signin", (req, res) => {
     }    
 });
 
+
+
 app.get("/me", function(req,res){               //Created an authenticated EP which  returns the user their information only if they send their token
     
     const token = req.headers.token              //Now it will give out the JWT
@@ -65,6 +67,7 @@ app.get("/me", function(req,res){               //Created an authenticated EP wh
             foundUser = users[i]
         }            
     }
+
     if(foundUser){
         res.json({
             username: foundUser.username,
