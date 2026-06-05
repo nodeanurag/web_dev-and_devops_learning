@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "randomabc";                         // Should be a strong, secure secret
+const JWT_SECRET = "iloveKV";                         // Should be a strong, secure secret
 const app = express();
 
 app.use(express.json())
