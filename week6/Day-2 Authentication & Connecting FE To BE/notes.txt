@@ -7,3 +7,4 @@ Notes:
 
     - JWT (JSON Web Token) uses encoding to format its data, like the header and payload, but it doesn’t encrypt the data. It also uses a secret key to sign the token, ensuring that the data hasn’t been tampered with. However, JWT’s encoding is for structure, not security, and the signature verifies the token’s integrity.
     
+    
