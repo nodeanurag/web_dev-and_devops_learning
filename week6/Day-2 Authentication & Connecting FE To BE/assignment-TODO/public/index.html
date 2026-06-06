@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="auth-box">
+        <h2>Signup</h2>
+        <input id="signupUsername" placeholder="Username">
+        <input id="signupPassword" type="password" placeholder="Password">
+        <button onclick="signup()">Signup</button>
+
+        <h2>Signin</h2>
+        <input id="signinUsername" placeholder="Username">
+        <input id="signinPassword" type="password" placeholder="Password">
+        <button onclick="signin()">Signin</button>
+    </div>
+
+    <div class="todo-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>My Todos</h1>
+            <button onclick="logout()" style="background: #dc3545;">Logout</button>
+        </div>
+
+        <div class="add-section">
+            <input id="todoInput" placeholder="Add new todo">
+            <button onclick="addTodo()">Add</button>
+        </div>
+
+        <div id="todos"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
