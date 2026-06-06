@@ -1,0 +1,102 @@
+======================================================
+TODO APP PROJECT – COMPLETE WORKFLOW & NOTES
+======================================================
+
+PROJECT OVERVIEW
+----------------
+A full-stack Todo application with user authentication (signup/signin) and CRUD operations on todos.
+- Backend: Node.js + Express, JWT for authentication, in-memory storage (array)
+- Frontend: HTML, CSS, vanilla JavaScript (fetch API, localStorage, DOM manipulation)
+- Purpose: Practice REST API design, authentication middleware, JWT handling, and frontend-backend integration.
+
+TECHNOLOGIES USED
+-----------------
+- Node.js / Express – server and routing
+- jsonwebtoken – generate and verify JWT tokens
+- HTML/CSS – minimal UI (just enough to test backend)
+- Vanilla JavaScript – fetch, async/await, DOM manipulation, localStorage
+- No database (in-memory arrays for users and todos – resets on server restart)
+
+WORKFLOW / HOW THE APP WORKS
+----------------------------
+1. User signs up with username and password (stored in memory – plain text for demo).
+2. User signs in – server validates credentials and returns a JWT token.
+3. Frontend stores token in localStorage and sends it in the "token" header for all subsequent requests.
+4. Protected routes (GET /todos, POST /todo, PATCH /todo/:id, DELETE /todo/:id) use the 'auth' middleware:
+   - Extracts token from headers
+   - Verifies token with JWT_SECRET
+   - Attaches username to req object
+5. Todos are stored with id, title, completed (boolean), and username (to filter per user).
+
+COMMON MISTAKES I MADE (AND HOW I FIXED THEM)
+---------------------------------------------
+1. No response.ok check in fetch calls
+   → Added if (!response.ok) and threw error with server message.
+
+2. Signin overwrote token even on failure (wrong password)
+   → Only set token inside if (response.ok) block.
+
+3. No error handling for network failures (offline, server down)
+   → Wrapped all fetch calls in try/catch and showed user alerts.
+
+4. Sending authenticated requests when token is null
+   → Created authFetch() helper that throws "Not authenticated" if token missing.
+
+5. Using innerHTML with user-provided todo title – XSS vulnerability
+   → Used textContent instead of innerHTML for the title.
+
+6. Calling loadTodos() before DOM is ready
+   → Wrapped initial load inside DOMContentLoaded event listener.
+
+7. No logout button to clear token
+   → Added logout() function that removes token from localStorage and resets UI.
+
+WHAT BEGINNERS SHOULD FOCUS ON (LESSONS LEARNED)
+------------------------------------------------
+- Always validate HTTP responses (response.ok) and handle errors gracefully.
+- Never trust user input – sanitize output (textContent > innerHTML).
+- Use try/catch for every async operation, especially network calls.
+- Check if DOM elements exist before manipulating them.
+- Provide a logout/reset mechanism – users need to clear state.
+- Test edge cases: duplicate signup, wrong password, empty todo, offline, token expiry.
+
+KEY FILES IN PROJECT
+--------------------
+/package.json          – dependencies (express, jsonwebtoken)
+/index.js              – Express server, routes, auth middleware, in-memory store
+/public/index.html     – HTML structure (auth forms, todo input, todo list container)
+/public/style.css      – basic styling
+/public/script.js      – frontend logic (fetch, DOM updates, token handling)
+
+API ENDPOINTS
+-------------
+POST   /signup         – { username, password } → creates user
+POST   /signin         – { username, password } → returns { token }
+GET    /todos          – (auth) returns user's todos array
+POST   /todo           – (auth) { title } → adds new todo
+PATCH  /todo/:id       – (auth) marks todo as completed
+DELETE /todo/:id       – (auth) deletes todo
+
+AUTHENTICATION FLOW (Frontend)
+------------------------------
+1. Signin response: { token: "eyJ..." }
+2. Save to localStorage: localStorage.setItem("token", token)
+3. For each authenticated request, send header: { token: token }
+4. On logout: localStorage.removeItem("token") and set token variable to null
+
+NOTES FOR FUTURE IMPROVEMENTS
+-----------------------------
+- Hash passwords with bcrypt instead of plain text.
+- Replace in-memory arrays with a real database (MongoDB, PostgreSQL).
+- Use environment variables for JWT_SECRET and port.
+- Switch to standard Authorization: Bearer <token> header.
+- Add input validation on backend (e.g., title not empty).
+- Implement "uncomplete" todo (PATCH with { completed: false }).
+- Add loading spinners and disable buttons during requests.
+
+CONCLUSION
+----------
+This project taught me the full flow of a client-server application with authentication.
+I learned how to debug network requests, secure frontend against XSS, handle async errors,
+and structure a simple but working REST API. The mistakes I fixed are now part of my
+developer toolkit. Build, break, fix – that's how you grow.
