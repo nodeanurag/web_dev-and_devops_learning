@@ -34,3 +34,33 @@ app.post("/signup",logger, function(req, res){          //signup ke liye route..
         message:"Signed in successfully!"
     });
 })
+
+app.post("/signin", logger, function(req, res){         //signin ke liye yeh route...sigin wla axios yaha se data fetch krega 
+    
+    //username and password yaha se input lega 
+    const username = req.body.username;
+    const password = req.body.password;
+
+    let foundUser = null;                               //pehle isko null rakhe hai ekdm empty
+
+    for (let i = 0; i < users.length; i++) {            //yeh users array se search kr rha hai jo ki yaha ke input upar wle input se kaunse wle se match kr rha hai..usko founUser pe store krna hai
+        if (users[i].username === username && users[i].password === password) {
+            foundUser = users[i];                       //yaha store kiya hai
+        }
+    }
+
+    if (!foundUser) {                                   //agra foundUser nahi hai toh yeh status show kr do message de do         
+        return res.status(401).json({ 
+            message: "Invalid Credentials" 
+        }); // Send 401 status for invalid credentials
+    } 
+    else {                                              //aur agar hai then jwt se usko sign kro means encode kro apne secret key se 
+        const token = jwt.sign({ 
+            username
+        }, JWT_SECRET);
+
+        res.json({ 
+            token: token                                //aur yeh token return kr do
+        });
+    }
+});
