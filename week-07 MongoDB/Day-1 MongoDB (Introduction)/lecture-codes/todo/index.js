@@ -10,3 +10,19 @@ const user = new schema({
     name: string,
     
 });
+
+const todo = new schema({
+    title: string,
+    description: string,
+    done: boolean,
+    userId: {type: objectId, ref: "user"}
+
+});
+
+const userModel = mongooose.model('user', user);
+const todoModel = mongooose.model('todo', todo);
+
+module.exports = {
+    userModel: userModel,
+    todoModel: todoModel
+}
