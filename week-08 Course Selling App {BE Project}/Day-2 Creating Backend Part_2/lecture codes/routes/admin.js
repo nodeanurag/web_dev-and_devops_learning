@@ -228,3 +228,26 @@ adminRouter.put("/course", adminMiddleware, async function(req,res) {
 });
 
 
+
+// Define the admin routes for getting all courses
+adminRouter.get("/course/bulk", adminMiddleware, async function(req,res){
+    // Get the adminId from the request object
+    const adminId = req.adminId;
+
+    // Find all the courses with given creatorId
+    const courses = await courseModel.find({
+        creatorId: adminId,
+    });
+
+    // Respond with the courses if they are found successfully
+    res.json({
+        message: "Course Updated",
+        courses: courses,
+    });
+});
+
+
+module.exports = {
+    adminRouter: adminRouter
+}
+
