@@ -1,0 +1,18 @@
+/* Reset default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Center the app content vertically and horizontally */
+body {
+  font-family: system-ui, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #7688a3 0%, #6d35c7 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 16px;
+}
