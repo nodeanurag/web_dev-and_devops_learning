@@ -1,0 +1,76 @@
+.app-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.app-heading {
+  color: #1e293b;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.counter-display {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.counter-display h2 {
+  margin: 0.5rem 0;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.counter-display h2:first-child {
+  color: #2563eb;
+}
+
+.counter-display h2:last-child {
+  color: #dc2626;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-increase {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-decrease {
+  background: #dc2626;
+  color: white;
+}
+
+.btn-reset {
+  background: #64748b;
+  color: white;
+}
